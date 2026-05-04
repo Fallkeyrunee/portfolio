@@ -2,10 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Paul Kirun Portfolio</title>
+    <title>Paul Kirun Tiongson | Portfolio</title>
 
     <link rel="stylesheet" href="styles.css" />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
       rel="stylesheet"
@@ -13,165 +12,208 @@
   </head>
 
   <body>
+    <div class="cursor-glow"></div>
+
     <nav>
-      <a href="#home" class="nav-link active">Home</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#skills" class="nav-link">Skills</a>
-      <a href="#about" class="nav-link">About me</a>
-      <a href="#contact" class="nav-link">Contact</a>
+      <div class="nav-links">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#case-study" class="nav-link">Case Study</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <button
+        onclick="toggleTheme()"
+        class="theme-btn"
+        aria-label="Toggle theme"
+      >
+        🌗
+      </button>
     </nav>
 
-    <section id="home" class="hero show">
-      <h1>Paul Kirun Tiongson</h1>
-      <p style="color:#64748b; margin-top:10px;">
-  Based in the Philippines • Available for freelance & full-time work
-</p>
-      <p class="subtitle">
-        I design and build clean, user-focused digital experiences.
-      </p>
-      <a href="#projects" class="btn">View Work</a>
+    <!-- HERO -->
+    <section id="home" class="hero fade-section">
+      <div class="container">
+        <h1 class="name">Paul Kirun Tiongson</h1>
+
+        <h2 class="headline">
+          Frontend Developer who improves product performance & user experience
+        </h2>
+
+        <p class="summary">
+          5+ years building scalable enterprise applications at Accenture.
+          Specialized in React, UI/UX, and performance optimization that
+          improves real user workflows.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#projects" class="btn">View Work</a>
+          <a href="#contact" class="btn">Contact</a>
+          <a href="resume.pdf" class="btn" download>Resume</a>
+        </div>
+      </div>
     </section>
 
-    <section id="projects">
-      <h2>Selected Work</h2>
+    <section id="summary" class="fade-section">
+      <div class="container">
+        <h2>Summary</h2>
+        <p class="summary-text">
+          Frontend Developer with 5+ years of experience delivering scalable,
+          high-performance web applications in enterprise environments. Expert
+          in React, JavaScript, and UI/UX design, focused on building intuitive
+          interfaces that improve user efficiency and product performance.
+        </p>
 
-      <div class="grid">
-        <div
-          class="card"
-          onclick="
-            openModal('E-commerce UI', 'Modern shopping design', 'Figma, React')
-          "
-        >
-          <img src="https://picsum.photos/400/300?1" />
-          <div class="card-content">
-            <h3>E-commerce UI</h3>
-            <p>
-              Designed a clean and user-friendly shopping interface focused on
-              improving product discovery and checkout flow.
-            </p>
-          </div>
+        <p class="summary-text">
+          Successfully optimized internal systems leading to
+          <strong>~30% faster workflows</strong>, reduced user errors, and
+          improved usability across high-volume platforms.
+        </p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="fade-section">
+      <div class="container">
+        <h2>Experience</h2>
+
+        <div class="case">
+          <h3>Frontend Developer — Accenture</h3>
+          <p class="meta">2021 – Present</p>
+
+          <ul>
+            <li>Built scalable UI systems for enterprise apps</li>
+            <li>Improved UX workflows across internal platforms</li>
+            <li>Optimized performance and load speed</li>
+          </ul>
         </div>
+      </div>
+    </section>
 
-        <div
-          class="card"
-          onclick="
-            openModal('Dashboard UX', 'Enterprise redesign', 'Figma, CSS')
-          "
-        >
-          <img src="https://picsum.photos/400/300?2" />
-          <div class="card-content">
-            <h3>Dashboard UX</h3>
-            <p>
-              Redesigned an internal dashboard to improve usability, navigation,
-              and overall user efficiency.
-            </p>
+    <!-- PROJECTS -->
+    <section id="projects" class="fade-section">
+      <div class="container">
+        <h2>Selected Work</h2>
+
+        <div class="grid">
+          <div
+            class="card"
+            onclick="
+              openModal('E-commerce UX', 'Improved checkout flow', 'React, UX')
+            "
+          >
+            <h3>E-commerce UX</h3>
+            <p class="impact">Improved conversion flow</p>
+            <p class="mini">↓ Bounce • ↑ UX clarity</p>
           </div>
-        </div>
 
-        <div
-          class="card"
-          onclick="openModal('SMM Campaign', 'Branding visuals', 'Photoshop')"
-        >
-          <img src="https://picsum.photos/400/300?3" />
-          <div class="card-content">
-            <h3>SMM Campaign</h3>
-            <p>
-              Created visual assets and branding for social media campaigns to
-              enhance engagement and brand consistency.
-            </p>
+          <div
+            class="card"
+            onclick="
+              openModal(
+                'Enterprise Dashboard',
+                'Faster workflows',
+                'Frontend, UX',
+              )
+            "
+          >
+            <h3>Enterprise Dashboard</h3>
+            <p class="impact">Reduced task time</p>
+            <p class="mini">~30% faster</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="case-study">
-      <h2>Case Study</h2>
+    <!-- CASE STUDY -->
+    <section id="case-study" class="fade-section">
+      <div class="container">
+        <h2>Case Study</h2>
 
-      <div class="case">
-        <h3>E-commerce Platform Redesign</h3>
+        <div class="case">
+          <h3>Enterprise Dashboard Optimization</h3>
 
-        <p>
-          <strong>Overview</strong><br />
-          Redesigned a modern e-commerce interface focused on improving
-          usability and conversion flow.
-        </p>
+          <p class="story">
+            At Accenture, I improved an internal dashboard used daily by
+            operations teams handling high-volume workflows.
+          </p>
 
-        <p>
-          <strong>Problem</strong><br />
-          Users experienced friction during product browsing and checkout,
-          leading to drop-offs and inefficient navigation.
-        </p>
+          <div class="story-grid">
+            <div>
+              <h4>🚨 Problem</h4>
+              <p>Slow navigation and inefficient workflows</p>
+            </div>
 
-        <p>
-          <strong>Approach</strong><br />
-          Conducted UI audit and simplified the layout by restructuring product
-          categories, improving visual hierarchy, and reducing unnecessary steps
-          in checkout.
-        </p>
+            <div>
+              <h4>🎯 Goal</h4>
+              <p>Improve speed, usability, and clarity</p>
+            </div>
 
-        <p>
-          <strong>Solution</strong><br />
-          Designed a clean, responsive interface with clear CTAs, improved
-          spacing, and consistent component design.
-        </p>
+            <div>
+              <h4>⚙️ Actions</h4>
+              <ul>
+                <li>Redesigned UI</li>
+                <li>Built reusable components</li>
+                <li>Optimized performance</li>
+              </ul>
+            </div>
 
-        <p>
-          <strong>My Role</strong><br />
-          UI/UX Design and Frontend Development
-        </p>
-
-        <p>
-          <strong>Tools</strong><br />
-          Figma, HTML, CSS, JavaScript
-        </p>
-
-        <img src="https://picsum.photos/800/400?random=10" />
-
-        <p>
-          <strong>Outcome</strong><br />
-          Delivered a more intuitive user experience with improved navigation
-          clarity and a streamlined checkout flow.
-        </p>
+            <div>
+              <h4>📊 Impact</h4>
+              <ul>
+                <li><strong>30% faster tasks</strong></li>
+                <li>Reduced errors</li>
+                <li>Improved efficiency</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="skills">
-        <span>Figma</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>Photoshop</span>
+    <!-- SKILLS -->
+    <section id="skills" class="fade-section">
+      <div class="container">
+        <h2>Skills</h2>
+
+        <div class="grid">
+          <div class="card">HTML, CSS, JavaScript, React</div>
+          <div class="card">UI/UX, Figma</div>
+          <div class="card">Performance Optimization</div>
+        </div>
       </div>
     </section>
 
-    <section id="about">
-      <h2>About Me</h2>
+    <!-- CONTACT -->
+    <section id="contact" class="fade-section">
+      <div class="container">
+        <h2>Contact</h2>
 
-      <p>
-        I am a Web Designer and Frontend Developer with experience in designing
-        and building modern digital interfaces. Currently working at Accenture,
-        I focus on creating clean, user-centered solutions that balance design
-        and functionality.
-      </p>
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:paulkirun@gmail.com" class="contact-link">
+            paulkirun@gmail.com
+          </a>
+        </p>
+
+        <p>
+          <strong>Phone:</strong>
+          <a href="tel:+639666616161" class="contact-link">
+            +63 966 661 6161
+          </a>
+        </p>
+
+        <form action="https://formspree.io/f/maqvevbk" method="POST">
+          <input type="text" name="name" placeholder="Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <textarea name="message" placeholder="Message" required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
     </section>
 
-    <section id="contact" class="contact">
-      <h2>Contact</h2>
-
-      <p><strong>Email:</strong> paulkirun@gmail.com</p>
-      <p><strong>Phone:</strong> +63 966 661 6161</p>
-
-      <form action="https://formspree.io/f/maqvevbk" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" required></textarea>
-
-        <button type="submit">Send Message</button>
-      </form>
-    </section>
-
+    <!-- MODAL -->
     <div id="modal" class="modal" onclick="closeModal()">
       <div class="modal-content" id="modal-content"></div>
     </div>

@@ -1,3 +1,7 @@
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+
 const modal = document.getElementById("modal");
 const modalContent = document.getElementById("modal-content");
 
@@ -6,7 +10,7 @@ function openModal(title, desc, tech) {
   modalContent.innerHTML = `
     <h2>${title}</h2>
     <p>${desc}</p>
-    <p><strong>${tech}</strong></p>
+    <p>${tech}</p>
   `;
 }
 
@@ -14,43 +18,29 @@ function closeModal() {
   modal.style.display = "none";
 }
 
-/* SCROLL ANIMATION */
-const sections = document.querySelectorAll("section");
-const cards = document.querySelectorAll(".card");
-
-window.addEventListener("scroll", () => {
-  const trigger = window.innerHeight * 0.85;
-
-  sections.forEach((sec) => {
-    if (sec.getBoundingClientRect().top < trigger) {
-      sec.classList.add("show");
-    }
-  });
-
-  cards.forEach((card, i) => {
-    if (card.getBoundingClientRect().top < trigger) {
-      setTimeout(() => card.classList.add("show"), i * 150);
-    }
-  });
-});
-
 /* NAV ACTIVE */
+const sections = document.querySelectorAll("section");
 const links = document.querySelectorAll(".nav-link");
 
 window.addEventListener("scroll", () => {
   let current = "";
 
-  sections.forEach((section) => {
-    const top = section.offsetTop - 150;
-    if (scrollY >= top) {
-      current = section.getAttribute("id");
-    }
+  sections.forEach(section => {
+    const top = section.offsetTop - 200;
+    if (scrollY >= top) current = section.id;
   });
 
-  links.forEach((link) => {
+  links.forEach(link => {
     link.classList.remove("active");
     if (link.getAttribute("href") === "#" + current) {
       link.classList.add("active");
     }
   });
+});
+
+const glow = document.querySelector(".cursor-glow");
+
+document.addEventListener("mousemove", (e) => {
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
 });
