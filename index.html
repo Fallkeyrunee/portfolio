@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Paul Kirun Portfolio</title>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav>
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <section id="home" class="hero show">
+      <h1>Paul Kirun</h1>
+      <p class="subtitle">Designing & building modern digital experiences</p>
+      <a href="#projects" class="btn">View Work</a>
+    </section>
+
+    <section id="projects">
+      <h2>Selected Work</h2>
+
+      <div class="grid">
+        <div
+          class="card"
+          onclick="
+            openModal('E-commerce UI', 'Modern shopping design', 'Figma, React')
+          "
+        >
+          <img src="https://picsum.photos/400/300?1" />
+          <div class="card-content">
+            <h3>E-commerce UI</h3>
+            <p>Modern shopping experience</p>
+          </div>
+        </div>
+
+        <div
+          class="card"
+          onclick="
+            openModal('Dashboard UX', 'Enterprise redesign', 'Figma, CSS')
+          "
+        >
+          <img src="https://picsum.photos/400/300?2" />
+          <div class="card-content">
+            <h3>Dashboard UX</h3>
+            <p>Improved usability</p>
+          </div>
+        </div>
+
+        <div
+          class="card"
+          onclick="openModal('SMM Campaign', 'Branding visuals', 'Photoshop')"
+        >
+          <img src="https://picsum.photos/400/300?3" />
+          <div class="card-content">
+            <h3>SMM Campaign</h3>
+            <p>Visual branding</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="case-study">
+      <h2>Case Study</h2>
+
+      <div class="case">
+        <h3>E-commerce UI Redesign</h3>
+
+        <p>
+          <strong>Problem:</strong><br />
+          Users struggled with navigation and checkout flow.
+        </p>
+
+        <p>
+          <strong>Solution:</strong><br />
+          Redesigned layout with simplified navigation and clearer CTAs.
+        </p>
+
+        <p>
+          <strong>My Role:</strong><br />
+          UI/UX design + frontend implementation.
+        </p>
+
+        <p>
+          <strong>Tools:</strong><br />
+          Figma, HTML, CSS, JavaScript
+        </p>
+
+        <img src="https://picsum.photos/800/400?random=10" alt="project" />
+
+        <p>
+          <strong>Result:</strong><br />
+          Improved usability and cleaner user experience.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills">
+        <span>Figma</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Photoshop</span>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+
+      <form action="https://formspree.io/f/maqvevbk" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <div id="modal" class="modal" onclick="closeModal()">
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
