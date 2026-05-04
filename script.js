@@ -67,3 +67,14 @@ document.addEventListener("mousemove", (e) => {
     glow.style.top = e.clientY + "px";
   }
 });
+
+// SMOOTH SCROLL (iOS-like)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
