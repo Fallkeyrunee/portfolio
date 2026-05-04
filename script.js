@@ -2,45 +2,68 @@ function toggleTheme() {
   document.body.classList.toggle("light");
 }
 
-const modal = document.getElementById("modal");
-const modalContent = document.getElementById("modal-content");
+/* PARALLAX + SMOOTH */
+let current = 0;
+let target = 0;
 
-function openModal(title, desc, tech) {
-  modal.style.display = "flex";
-  modalContent.innerHTML = `
-    <h2>${title}</h2>
-    <p>${desc}</p>
-    <p>${tech}</p>
-  `;
+function lerp(a, b, t) {
+  return a + (b - a) * t;
 }
 
-function closeModal() {
-  modal.style.display = "none";
+function animate() {
+  target = window.scrollY;
+  current = lerp(current, target, 0.08);
+
+  const hero = document.querySelector(".hero-inner");
+  if (hero) {
+    hero.style.transform = `translateY(${current * 0.15}px)`;
+  }
+
+  requestAnimationFrame(animate);
 }
+animate();
+
+/* FADE */
+const fade = document.querySelectorAll(".fade-section");
+
+window.addEventListener("scroll", () => {
+  const trigger = window.innerHeight * 0.85;
+
+  fade.forEach(el => {
+    if (el.getBoundingClientRect().top < trigger) {
+      el.classList.add("show");
+    }
+  });
+});
 
 /* NAV ACTIVE */
 const sections = document.querySelectorAll("section");
 const links = document.querySelectorAll(".nav-link");
 
 window.addEventListener("scroll", () => {
-  let current = "";
+  let currentSection = "";
 
   sections.forEach(section => {
     const top = section.offsetTop - 200;
-    if (scrollY >= top) current = section.id;
+    if (scrollY >= top) {
+      currentSection = section.id;
+    }
   });
 
   links.forEach(link => {
     link.classList.remove("active");
-    if (link.getAttribute("href") === "#" + current) {
+    if (link.getAttribute("href") === "#" + currentSection) {
       link.classList.add("active");
     }
   });
 });
 
+/* CURSOR FIXED (CENTERED) */
 const glow = document.querySelector(".cursor-glow");
 
 document.addEventListener("mousemove", (e) => {
-  glow.style.left = e.clientX + "px";
-  glow.style.top = e.clientY + "px";
+  if (glow) {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  }
 });
