@@ -6,30 +6,7 @@ function toggleTheme() {
 }
 
 // ===============================
-// SMOOTH PARALLAX (APPLE-LIKE)
-// ===============================
-let current = 0;
-let target = 0;
-
-function lerp(a, b, t) {
-  return a + (b - a) * t;
-}
-
-function animate() {
-  target = window.scrollY;
-  current = lerp(current, target, 0.08);
-
-  const hero = document.querySelector(".hero-inner");
-  if (hero) {
-    hero.style.transform = `translateY(${current * 0.12}px)`;
-  }
-
-  requestAnimationFrame(animate);
-}
-animate();
-
-// ===============================
-// FADE-IN SECTIONS (FIXED)
+// FADE SECTIONS
 // ===============================
 const fadeSections = document.querySelectorAll(".fade-section");
 
@@ -43,65 +20,34 @@ function revealSections() {
   });
 }
 
-// Run on load + scroll
 window.addEventListener("load", revealSections);
 window.addEventListener("scroll", revealSections);
 
 // ===============================
-// ACTIVE NAV LINK
+// ACTIVE NAV
 // ===============================
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-link");
 
 window.addEventListener("scroll", () => {
-  let currentSection = "";
+  let current = "";
 
   sections.forEach((section) => {
-    const top = section.offsetTop - 200;
-    if (window.scrollY >= top) {
-      currentSection = section.id;
+    if (window.scrollY >= section.offsetTop - 200) {
+      current = section.id;
     }
   });
 
   navLinks.forEach((link) => {
     link.classList.remove("active");
-    if (link.getAttribute("href") === "#" + currentSection) {
+    if (link.getAttribute("href") === "#" + current) {
       link.classList.add("active");
     }
   });
 });
 
 // ===============================
-// CURSOR GLOW (FIXED CENTER)
-// ===============================
-const glow = document.querySelector(".cursor-glow");
-
-document.addEventListener("mousemove", (e) => {
-  if (!glow) return;
-
-  glow.style.left = e.clientX + "px";
-  glow.style.top = e.clientY + "px";
-});
-
-// ===============================
-// SMOOTH SCROLL (MOBILE SAFE)
-// ===============================
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    const target = document.querySelector(this.getAttribute("href"));
-    if (!target) return;
-
-    target.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  });
-});
-
-// ===============================
-// CASE STUDY STEP REVEAL + UI SWITCH
+// CASE STUDY SWITCH
 // ===============================
 const steps = document.querySelectorAll(".step");
 const before = document.querySelector(".visual-before");
@@ -111,71 +57,203 @@ window.addEventListener("scroll", () => {
   const trigger = window.innerHeight * 0.6;
 
   steps.forEach((step, i) => {
-    const rect = step.getBoundingClientRect();
-
-    if (rect.top < trigger) {
+    if (step.getBoundingClientRect().top < trigger) {
       step.classList.add("active");
 
-      // 🔥 BEFORE → AFTER SWITCH
       if (i <= 1) {
-        if (before) before.classList.add("active");
-        if (after) after.classList.remove("active");
+        before?.classList.add("active");
+        after?.classList.remove("active");
       } else {
-        if (before) before.classList.remove("active");
-        if (after) after.classList.add("active");
+        before?.classList.remove("active");
+        after?.classList.add("active");
       }
     }
   });
 });
 
 // ===============================
-// PARALLAX DEPTH (MULTI-LAYER)
+// INIT STATE (IMPORTANT FIX)
 // ===============================
-const layers = document.querySelectorAll(".layer");
-
-window.addEventListener("scroll", () => {
-  const scroll = window.scrollY;
-
-  layers.forEach((layer, i) => {
-    const speed = (i + 1) * 0.04;
-    layer.style.transform = `translateY(${scroll * speed}px)`;
-  });
+window.addEventListener("load", () => {
+  document.querySelector(".step")?.classList.add("active");
+  document.querySelector(".visual-before")?.classList.add("active");
 });
 
 // ===============================
-// CHART ANIMATION (RUN ONCE)
+// PREMIUM CURSOR PRO SYSTEM
 // ===============================
-const bars = document.querySelectorAll(".bar");
-const chart = document.querySelector(".chart");
+const glow = document.querySelector(".cursor-glow");
+const glow2 = document.querySelector(".glow-2");
 
-let chartPlayed = false;
+let mouseX = 0;
+let mouseY = 0;
 
-function animateChart() {
-  if (chartPlayed) return;
-  chartPlayed = true;
+let trailX = 0;
+let trailY = 0;
 
-  bars.forEach((bar, i) => {
-    setTimeout(() => {
-      bar.classList.add("animate");
-    }, i * 200);
-  });
+let lastMoveTime = Date.now();
+let lastScroll = window.scrollY;
+
+// sizes
+const baseSize = 220;
+const trailSize = 400;
+
+// ===============================
+// TRACK MOUSE
+// ===============================
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  lastMoveTime = Date.now();
+});
+
+// ===============================
+// GET ACTIVE SECTION
+// ===============================
+function getActiveSection() {
+  const sections = document.querySelectorAll("section");
+
+  for (let sec of sections) {
+    const rect = sec.getBoundingClientRect();
+    if (
+      rect.top <= window.innerHeight / 2 &&
+      rect.bottom >= window.innerHeight / 2
+    ) {
+      return sec;
+    }
+  }
+  return null;
 }
 
-window.addEventListener("scroll", () => {
-  if (!chart) return;
+// ===============================
+// ANIMATION LOOP
+// ===============================
+function animate() {
+  const now = Date.now();
 
-  const rect = chart.getBoundingClientRect();
+  // ===============================
+  // 🎯 ACTIVE SECTION
+  // ===============================
+  const section = getActiveSection();
 
-  if (rect.top < window.innerHeight * 0.8) {
-    animateChart();
+  if (section) {
+    const glowMode = section.dataset.glow;
+    const color = section.dataset.glowColor;
+
+    // 🌙 SHOW ONLY ON DARK
+    if (glowMode === "light") {
+      glow.style.opacity = "0";
+      glow2.style.opacity = "0";
+    } else {
+      glow.style.opacity = "1";
+      glow2.style.opacity = "1";
+    }
+
+    // 🎨 COLOR CHANGE
+    if (color) {
+      glow.style.background = `radial-gradient(circle, rgba(${color},0.25), transparent 70%)`;
+      glow2.style.background = `radial-gradient(circle, rgba(${color},0.12), transparent 75%)`;
+    }
   }
+
+  // ===============================
+  // 😴 IDLE EXPAND
+  // ===============================
+  const idleTime = now - lastMoveTime;
+  let scale = 1;
+
+  if (idleTime > 1000) {
+    scale = 1.4; // expand when idle
+  }
+
+  // ===============================
+  // 🚀 SCROLL SPEED REACTION
+  // ===============================
+  const scrollNow = window.scrollY;
+  const speed = Math.abs(scrollNow - lastScroll);
+  lastScroll = scrollNow;
+
+  const stretch = Math.min(speed * 0.02, 0.4);
+
+  // ===============================
+  // ⚡ MAIN GLOW (NO DELAY)
+  // ===============================
+  glow.style.transform = `
+    translate3d(${mouseX - baseSize / 2}px, ${mouseY - baseSize / 2}px, 0)
+    scale(${scale + stretch}, ${scale - stretch})
+  `;
+
+  // ===============================
+  // 🌊 TRAIL
+  // ===============================
+  trailX += (mouseX - trailX) * 0.12;
+  trailY += (mouseY - trailY) * 0.12;
+
+  glow2.style.transform = `
+    translate3d(${trailX - trailSize / 2}px, ${trailY - trailSize / 2}px, 0)
+    scale(${scale})
+  `;
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+// ===============================
+// Hover buttons
+// ===============================
+
+const interactive = document.querySelectorAll("a, button, .card");
+
+interactive.forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    glow.style.transform = "translate(-50%, -50%) scale(1.2)";
+    glow.style.opacity = "1";
+  });
+
+  el.addEventListener("mouseleave", () => {
+    glow.style.transform = "translate(-50%, -50%) scale(1)";
+    glow.style.opacity = "0.7";
+  });
 });
 
-// Ensure first step + visuals show immediately
-window.addEventListener("load", () => {
-  const firstStep = document.querySelector(".step");
-  if (firstStep) firstStep.classList.add("active");
+// ===============================
+// CURSOR BOOST ON TIMELINE HOVER
+// ===============================
+document.querySelectorAll(".timeline-content").forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    glow.style.transform = "translate(-50%, -50%) scale(0.7)";
+  });
 
-  const before = document.querySelector(".visual-before");
-  if (before) before.classList.add("active");
+  el.addEventListener("mouseleave", () => {
+    glow.style.transform = "translate(-50%, -50%) scale(1)";
+  });
+});
+
+// ===============================
+// TIMELINE SCROLL + PROGRESS
+// ===============================
+const timeline = document.querySelector(".timeline");
+
+// create progress line
+const progress = document.createElement("div");
+progress.classList.add("timeline-progress");
+timeline.appendChild(progress);
+
+const items = document.querySelectorAll(".timeline-item");
+
+window.addEventListener("scroll", () => {
+  const rect = timeline.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  // progress height
+  let progressHeight = windowHeight - rect.top;
+  progressHeight = Math.max(0, Math.min(progressHeight, rect.height));
+  progress.style.height = progressHeight + "px";
+
+  // reveal items
+  items.forEach((item) => {
+    if (item.getBoundingClientRect().top < windowHeight * 0.85) {
+      item.classList.add("show");
+    }
+  });
 });

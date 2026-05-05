@@ -233,19 +233,64 @@ button {
 }
 
 /* CURSOR GLOW FIXED */
-.cursor-glow {
+.cursor-glow,
+.glow-2 {
   position: fixed;
-  width: 250px;
-  height: 250px;
+  top: 0;
+  left: 0;
+
   pointer-events: none;
+  border-radius: 50%;
+  will-change: transform;
+
+  z-index: 999;
+  transition: transform 0.2s ease;
+}
+
+/* MAIN GLOW (FAST) */
+.cursor-glow {
+  width: 220px;
+  height: 220px;
+
   background: radial-gradient(
     circle,
-    rgba(132, 169, 140, 0.15),
+    rgba(132, 169, 140, 0.25),
     transparent 70%
   );
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 999;
+}
+/* smooth fade */
+.cursor-glow,
+.glow-2 {
+  transition:
+    opacity 0.3s ease,
+    transform 0.15s ease;
+}
+/* TRAIL (SLOW + BLUR) */
+.glow-2 {
+  width: 400px;
+  height: 400px;
+
+  background: radial-gradient(
+    circle,
+    rgba(132, 169, 140, 0.12),
+    transparent 75%
+  );
+
+  filter: blur(40px);
+}
+
+/* SECOND LAYER (soft blur trail) */
+.glow-2 {
+  width: 400px;
+  height: 400px;
+
+  background: radial-gradient(
+    circle,
+    rgba(132, 169, 140, 0.12),
+    transparent 75%
+  );
+
+  filter: blur(40px);
 }
 
 /* LIGHT MODE */
@@ -451,7 +496,6 @@ section {
   scroll-snap-align: start;
 }
 
-
 /* LAYERS */
 .layer {
   position: absolute;
@@ -622,4 +666,129 @@ section {
     rgba(132, 169, 140, 0.25),
     transparent 70%
   );
+}
+
+/* ===============================
+   TIMELINE LAYOUT
+=================================*/
+/* ===============================
+   TIMELINE PRO (APPLE STYLE)
+=================================*/
+
+.timeline {
+  position: relative;
+  margin-top: 80px;
+}
+
+/* center line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: rgba(132, 169, 140, 0.2);
+  transform: translateX(-50%);
+}
+
+/* animated progress line */
+.timeline-progress {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(#84a98c, transparent);
+  transform: translateX(-50%);
+  transition: height 0.2s ease;
+}
+
+/* item */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 20px 40px;
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.timeline-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* left/right layout */
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+}
+
+/* content */
+.timeline-content {
+  display: inline-block;
+  max-width: 300px;
+}
+
+/* dot with icon */
+.timeline-dot {
+  position: absolute;
+  top: 20px;
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(132, 169, 140, 0.15);
+  border: 1px solid rgba(132, 169, 140, 0.4);
+  border-radius: 50%;
+
+  backdrop-filter: blur(10px);
+
+  font-size: 18px;
+}
+
+/* position dots */
+.timeline-item.left .timeline-dot {
+  right: -21px;
+}
+
+.timeline-item.right .timeline-dot {
+  left: -21px;
+}
+
+/* hover glow sync */
+.timeline-content:hover {
+  box-shadow: 0 0 40px rgba(132, 169, 140, 0.25);
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .timeline::before,
+  .timeline-progress {
+    left: 20px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 50px;
+    text-align: left;
+  }
+
+  .timeline-item.left,
+  .timeline-item.right {
+    left: 0;
+  }
+
+  .timeline-dot {
+    left: 0 !important;
+  }
 }
