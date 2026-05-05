@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
     <title>Paul Kirun Tiongson | Portfolio</title>
 
     <link rel="stylesheet" href="styles.css" />
@@ -19,7 +22,7 @@
       <div class="nav-links">
         <a href="#home" class="nav-link active">Home</a>
         <a href="#experience" class="nav-link">Experience</a>
-        <a href="#projects" class="nav-link">Projects</a>
+        <!-- <a href="#projects" class="nav-link">Projects</a> -->
         <a href="#case-study" class="nav-link">Case Study</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -39,38 +42,59 @@
         <h1 class="name">Paul Kirun Tiongson</h1>
 
         <h2 class="headline">
-          Frontend Developer who improves product performance & user experience
+          Frontend Developer focused on performance, UX, and real-world impact
         </h2>
 
         <p class="summary">
-          5+ years building scalable enterprise applications at Accenture.
-          Specialized in React, UI/UX, and performance optimization that
-          improves real user workflows.
+          5+ years of experience building enterprise web applications at
+          Accenture. Skilled in web design, frontend development, and UI/UX
+          optimization — improving system performance and user workflows.
+        </p>
+
+        <p class="summary">
+          Also experienced in <strong>Graphic Design, SMM, and Coding</strong>,
+          with a strong eye for design and usability.
         </p>
 
         <div class="hero-buttons">
-          <a href="#projects" class="btn">View Work</a>
-          <a href="#contact" class="btn">Contact</a>
-          <a href="resume.pdf" class="btn" download>Resume</a>
+          <a href="#case-study" class="btn">View Case Study</a>
+          <a href="#contact" class="btn">Contact Me</a>
+          <a href="resume.pdf" class="btn" download>Download Resume</a>
         </div>
       </div>
     </section>
 
     <section id="summary" class="fade-section">
       <div class="container">
-        <h2>Summary</h2>
-        <p class="summary-text">
-          Frontend Developer with 5+ years of experience delivering scalable,
-          high-performance web applications in enterprise environments. Expert
-          in React, JavaScript, and UI/UX design, focused on building intuitive
-          interfaces that improve user efficiency and product performance.
-        </p>
+        <h2>Professional Summary</h2>
+        <div class="card">
+          <p class="summary-text">
+            Frontend Developer with 5+ years of experience delivering scalable,
+            high-performance enterprise applications. Specialized in React,
+            JavaScript, and UI/UX design with a strong focus on performance,
+            usability, and clean component architecture.
+          </p>
 
-        <p class="summary-text">
-          Successfully optimized internal systems leading to
-          <strong>~30% faster workflows</strong>, reduced user errors, and
-          improved usability across high-volume platforms.
-        </p>
+          <p class="summary-text">
+            Proven track record of improving user workflows, reducing friction,
+            and optimizing systems — including delivering
+            <strong>~30% faster task completion</strong> in enterprise
+            environments.
+          </p>
+
+          <p class="summary-text">
+            Additional expertise in
+            <strong
+              >Web Design, Graphic Design, Social Media Management (SMM)</strong
+            >, and frontend coding, allowing a full-spectrum approach from
+            design to development.
+          </p>
+
+          <p class="availability">
+            Available for <strong>Freelance</strong> and
+            <strong>Full-Time Opportunities</strong>
+          </p>
+        </div>
       </div>
     </section>
 
@@ -84,16 +108,41 @@
           <p class="meta">2021 – Present</p>
 
           <ul>
-            <li>Built scalable UI systems for enterprise apps</li>
-            <li>Improved UX workflows across internal platforms</li>
-            <li>Optimized performance and load speed</li>
+            <li>
+              Developed scalable and reusable UI components for enterprise
+              systems
+            </li>
+            <li>
+              Improved user workflows and interface usability across internal
+              tools
+            </li>
+            <li>
+              Optimized performance, reducing load times and improving
+              responsiveness
+            </li>
+            <li>
+              Collaborated with designers, backend developers, and stakeholders
+            </li>
+            <li>
+              Applied UI/UX principles to enhance user experience and
+              accessibility
+            </li>
           </ul>
+
+          <p class="meta">
+            <strong>Tech Stack:</strong> HTML, CSS, JavaScript, React, Figma
+          </p>
+
+          <p class="meta">
+            <strong>Additional Skills:</strong> Web Design, Graphic Design, SMM,
+            Coding
+          </p>
         </div>
       </div>
     </section>
 
     <!-- PROJECTS -->
-    <section id="projects" class="fade-section">
+    <!-- <section id="projects" class="fade-section">
       <div class="container">
         <h2>Selected Work</h2>
 
@@ -125,49 +174,106 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- CASE STUDY -->
-    <section id="case-study" class="fade-section">
-      <div class="container">
-        <h2>Case Study</h2>
+    <section id="case-study" class="case-section">
+      <div class="case-wrapper">
+        <!-- LEFT: STICKY VISUAL -->
+        <div class="case-visual">
+          <div class="parallax">
+            <!-- BACK -->
+            <div class="layer layer-back"></div>
 
-        <div class="case">
-          <h3>Enterprise Dashboard Optimization</h3>
+            <!-- BEFORE UI -->
+            <div class="layer layer-ui">
+              <!-- BEFORE -->
+              <div class="visual-before active">
+                <h4>Before</h4>
+                <div class="mockup">
+                  <div class="mock-header"></div>
+                  <div class="mock-content">
+                    <div class="mock-sidebar"></div>
+                    <div class="mock-main">
+                      <div class="mock-card"></div>
+                      <div class="mock-card"></div>
+                      <div class="mock-card"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-          <p class="story">
-            At Accenture, I improved an internal dashboard used daily by
-            operations teams handling high-volume workflows.
-          </p>
-
-          <div class="story-grid">
-            <div>
-              <h4>🚨 Problem</h4>
-              <p>Slow navigation and inefficient workflows</p>
+              <!-- AFTER -->
+              <div class="visual-after">
+                <h4>After</h4>
+                <div class="mockup">
+                  <div class="mock-header"></div>
+                  <div class="mock-content">
+                    <div class="mock-sidebar"></div>
+                    <div class="mock-main">
+                      <div class="mock-card" style="height: 40px"></div>
+                      <div class="mock-card" style="height: 40px"></div>
+                      <div class="mock-card" style="height: 40px"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div>
-              <h4>🎯 Goal</h4>
-              <p>Improve speed, usability, and clarity</p>
+            <!-- CHART -->
+            <div class="layer layer-front">
+              <div class="chart">
+                <div class="bar" style="--h: 40%"></div>
+                <div class="bar" style="--h: 65%"></div>
+                <div class="bar" style="--h: 90%"></div>
+              </div>
+              <p class="chart-label">Performance ↑</p>
             </div>
+          </div>
+        </div>
 
-            <div>
-              <h4>⚙️ Actions</h4>
-              <ul>
-                <li>Redesigned UI</li>
-                <li>Built reusable components</li>
-                <li>Optimized performance</li>
-              </ul>
-            </div>
+        <!-- RIGHT: STORY -->
+        <div class="case-story">
+          <div class="step" data-step="1">
+            <h2>Enterprise Dashboard Optimization</h2>
+            <p>
+              I worked on an internal enterprise system where users struggled
+              with slow workflows and complex navigation.
+            </p>
+          </div>
 
-            <div>
-              <h4>📊 Impact</h4>
-              <ul>
-                <li><strong>30% faster tasks</strong></li>
-                <li>Reduced errors</li>
-                <li>Improved efficiency</li>
-              </ul>
-            </div>
+          <div class="step" data-step="2">
+            <h3>🚨 The Problem</h3>
+            <p>
+              The interface was cluttered, making it hard to find key data.
+              Tasks that should take seconds were taking significantly longer.
+            </p>
+          </div>
+
+          <div class="step" data-step="3">
+            <h3>🎯 The Goal</h3>
+            <p>
+              Simplify the interface, improve performance, and reduce user
+              friction in daily workflows.
+            </p>
+          </div>
+
+          <div class="step" data-step="4">
+            <h3>⚙️ What I Did</h3>
+            <ul>
+              <li>Redesigned UI layout and hierarchy</li>
+              <li>Built reusable React components</li>
+              <li>Optimized rendering performance</li>
+              <li>Improved responsiveness</li>
+            </ul>
+          </div>
+
+          <div class="step" data-step="5">
+            <h3>📊 Impact</h3>
+            <ul>
+              <li><strong>~30% faster</strong> task completion</li>
+              <li>Reduced user errors</li>
+              <li>Improved workflow clarity</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -176,12 +282,20 @@
     <!-- SKILLS -->
     <section id="skills" class="fade-section">
       <div class="container">
-        <h2>Skills</h2>
+        <h2>Skills & Expertise</h2>
 
         <div class="grid">
-          <div class="card">HTML, CSS, JavaScript, React</div>
-          <div class="card">UI/UX, Figma</div>
-          <div class="card">Performance Optimization</div>
+          <div class="card">
+            Frontend Development (HTML, CSS, JavaScript, React)
+          </div>
+
+          <div class="card">Web Design & UI/UX</div>
+
+          <div class="card">Graphic Design</div>
+
+          <div class="card">Social Media Management (SMM)</div>
+
+          <div class="card">Programming & Coding</div>
         </div>
       </div>
     </section>
