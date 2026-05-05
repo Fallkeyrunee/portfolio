@@ -46,6 +46,30 @@ window.addEventListener("scroll", () => {
   });
 });
 
+
+// ===============================
+// NAV HIDE / SHOW (ADD HERE)
+// ===============================
+let lastScrollNav = 0; // 🔥 use different variable name
+const nav = document.querySelector("nav");
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll > lastScrollNav && currentScroll > 100) {
+    // hide
+    nav.style.transform = "translateX(-50%) translateY(80px)";
+    nav.style.opacity = "0";
+  } else {
+    // show
+    nav.style.transform = "translateX(-50%) translateY(0)";
+    nav.style.opacity = "1";
+  }
+
+  lastScrollNav = currentScroll;
+});
+
+
 // ===============================
 // CASE STUDY SWITCH
 // ===============================
@@ -297,3 +321,4 @@ function revealTitles() {
 
 window.addEventListener("scroll", revealTitles);
 window.addEventListener("load", revealTitles);
+
