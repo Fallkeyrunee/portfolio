@@ -253,34 +253,6 @@ document.querySelectorAll(".timeline-content").forEach((el) => {
   });
 });
 
-// ===============================
-// TIMELINE SCROLL + PROGRESS
-// ===============================
-const timeline = document.querySelector(".timeline");
-
-// create progress line
-const progress = document.createElement("div");
-progress.classList.add("timeline-progress");
-timeline.appendChild(progress);
-
-const items = document.querySelectorAll(".timeline-item");
-
-window.addEventListener("scroll", () => {
-  const rect = timeline.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-
-  // progress height
-  let progressHeight = windowHeight - rect.top;
-  progressHeight = Math.max(0, Math.min(progressHeight, rect.height));
-  progress.style.height = progressHeight + "px";
-
-  // reveal items
-  items.forEach((item) => {
-    if (item.getBoundingClientRect().top < windowHeight * 0.85) {
-      item.classList.add("show");
-    }
-  });
-});
 
 // ===============================
 // SUMMARY STAGGER REVEAL
@@ -322,3 +294,35 @@ function revealTitles() {
 window.addEventListener("scroll", revealTitles);
 window.addEventListener("load", revealTitles);
 
+// ===============================
+// PREMIUM TIMELINE ENGINE
+// ===============================
+const timeline = document.querySelector(".timeline");
+
+if (timeline) {
+  const progress = document.createElement("div");
+  progress.classList.add("timeline-progress");
+  timeline.appendChild(progress);
+
+  const items = document.querySelectorAll(".timeline-item");
+
+  function animateTimeline() {
+    const rect = timeline.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // PROGRESS LINE
+    let height = windowHeight - rect.top;
+    height = Math.max(0, Math.min(height, rect.height));
+    progress.style.height = height + "px";
+
+    // REVEAL ITEMS
+    items.forEach((item) => {
+      if (item.getBoundingClientRect().top < windowHeight * 0.85) {
+        item.classList.add("show");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", animateTimeline);
+  window.addEventListener("load", animateTimeline);
+}
