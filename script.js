@@ -42,6 +42,7 @@ function updateNav() {
     link.classList.remove("active");
     if (link.getAttribute("href") === "#" + current) {
       link.classList.add("active");
+      moveIndicator(link);
     }
   });
 
@@ -202,6 +203,9 @@ const hero = document.querySelector(".hero");
 function updateHero() {
   if (!hero) return;
 
+  // ❌ disable on mobile
+  if (window.innerWidth <= 768) return;
+
   const scrolled = window.scrollY;
   hero.style.transform = `scale(${1 - scrolled * 0.0003})`;
   hero.style.opacity = `${1 - scrolled * 0.0015}`;
@@ -243,4 +247,54 @@ window.addEventListener("load", () => {
   revealExtras();
   animateTimeline();
   animateSkills();
+});
+
+// ===============================
+// TOGGLE MENU
+// ===============================
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinksContainer = document.querySelector(".nav-links");
+
+menuToggle.addEventListener("click", () => {
+  navLinksContainer.classList.toggle("open");
+});
+
+document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    navLinksContainer.classList.remove("open");
+  });
+});
+
+// ===============================
+// INDICATOR
+// ===============================
+const indicator = document.querySelector(".nav-indicator");
+const links = document.querySelectorAll(".nav-link");
+
+function moveIndicator(el) {
+  const parent = el.parentElement;
+
+  const rect = el.getBoundingClientRect();
+  const parentRect = parent.getBoundingClientRect();
+
+  const left = rect.left - parentRect.left;
+  const width = rect.width;
+
+  indicator.style.width = width + "px";
+  indicator.style.transform = `translateX(${left}px)`;
+}
+
+/* INITIAL POSITION */
+window.addEventListener("load", () => {
+  const active = document.querySelector(".nav-link.active");
+  if (active) moveIndicator(active);
+});
+
+/* CLICK */
+links.forEach((link) => {
+  link.addEventListener("click", () => {
+    links.forEach((l) => l.classList.remove("active"));
+    link.classList.add("active");
+    moveIndicator(link);
+  });
 });

@@ -29,6 +29,7 @@
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
+  padding-inline: 10px;
 }
 
 /* underline animation */
@@ -85,10 +86,12 @@ body::after {
 .container {
   max-width: 1100px;
   margin: auto;
-  padding: 0 24px;
 }
 
 /* NAV */
+/* =========================
+   DESKTOP NAV (RESTORE)
+========================= */
 nav {
   position: fixed;
   top: 20px;
@@ -139,6 +142,28 @@ nav {
 
 .theme-btn:hover {
   background: rgba(132, 169, 140, 0.4);
+}
+
+/* THE SLIDING PILL */
+.nav-indicator {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: rgba(132, 169, 140, 0.18);
+  box-shadow:
+    inset 0 0 0 1px rgba(132, 169, 140, 0.25),
+    0 4px 20px rgba(132, 169, 140, 0.15);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+
+/* REMOVE ABSOLUTE POSITIONING */
+.menu-toggle {
+  display: none; /* desktop hidden */
 }
 
 /* HERO */
@@ -765,268 +790,231 @@ section {
   color: #94a3b8;
   margin-bottom: 10px;
 }
+/* =========================
+   GLOBAL MOBILE TYPOGRAPHY
+========================= */
 
-/* ===============================
-   MOBILE (AUTO STACK)
-=============================== */
+h1 {
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* section titles (Experience, Skills, etc.) */
+.section-title {
+  font-size: 22px;
+}
+/* =========================
+   MOBILE (TABLET + PHONE)
+========================= */
 @media (max-width: 768px) {
-  .timeline::before,
-  .timeline-progress {
-    left: 20px;
-  }
+  /* NAV BAR */
 
-  .timeline-item {
-    width: 100%;
-    padding-left: 60px;
-    text-align: left;
-  }
-
-  .timeline-item.left,
-  .timeline-item.right {
-    left: 0;
-  }
-
-  .timeline-dot {
-    left: 20px;
-  }
-}
-
-/* Card upgrade */
-.summary-card {
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease;
-}
-
-.summary-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-}
-
-/* Subtle animated glow inside card */
-.summary-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 20% 30%,
-    rgba(132, 169, 140, 0.12),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-.summary-card:hover::before {
-  opacity: 1;
-}
-
-/* REVEAL ANIMATION */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  filter: blur(6px);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* visible state */
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
-}
-
-/* stagger delays */
-.reveal:nth-child(1) {
-  transition-delay: 0.1s;
-}
-.reveal:nth-child(2) {
-  transition-delay: 0.2s;
-}
-.reveal:nth-child(3) {
-  transition-delay: 0.3s;
-}
-.reveal:nth-child(4) {
-  transition-delay: 0.4s;
-}
-.reveal:nth-child(5) {
-  transition-delay: 0.5s;
-}
-
-/* Highlight line (important impact) */
-.highlight {
-  position: relative;
-}
-
-.highlight::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0%;
-  height: 2px;
-  background: linear-gradient(90deg, #84a98c, transparent);
-  transition: width 0.6s ease;
-}
-
-.highlight.show::after {
-  width: 100%;
-}
-
-/* =========================================
-   📱 MOBILE FIX — CLEAN & STABLE (ALL DEVICES)
-   Put this at the VERY END of your CSS
-========================================= */
-
-/* Disable heavy effects on mobile */
-@media (max-width: 768px) {
-  html {
-    scroll-snap-type: none;
-  }
-
-  body {
-    overflow-x: hidden;
-  }
-
-  section {
-    padding: 80px 16px;
-    padding-bottom: 120px; /* space for floating nav */
-  }
-
-  .container {
-    padding: 0;
-  }
-
-  /* =========================
-     NAV (BOTTOM FLOATING SAFE)
-  ========================= */
   nav {
-    position: fixed;
-    bottom: 14px;
-    top: auto;
-
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: 94%;
-    max-width: 420px;
-
-    padding: 10px 12px;
-    border-radius: 999px;
-
-    display: flex;
-    align-items: center;
+    width: 92%;
+    top: 10px;
+    padding: 10px 14px;
+    height: 45px;
     justify-content: space-between;
-
-    background: rgba(10, 20, 30, 0.7);
-    backdrop-filter: blur(16px);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    z-index: 9999;
   }
 
-  .nav-links {
+  /* HAMBURGER */
+  .menu-toggle {
     display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(132, 169, 140, 0.2);
+  }
+
+  /* NAV DROPDOWN */
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(-10px);
+
+    width: 92%;
+    max-width: 320px;
+
+    flex-direction: column;
     gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
+
+    padding: 12px;
+
+    background: rgba(10, 15, 25, 0.9);
+    backdrop-filter: blur(25px);
+
+    border-radius: 16px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: all 0.25s ease;
+    display: flex;
   }
 
-  .nav-links::-webkit-scrollbar {
-    display: none;
+  .nav-links.open {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
   }
 
-  .nav-link {
-    font-size: 12px;
-    padding: 6px 10px;
-    white-space: nowrap;
+  /* MOBILE LINKS */
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    border-radius: 12px;
   }
 
+  /* REMOVE DESKTOP PILL EFFECT */
+  .nav-links a.active {
+    background: rgba(132, 169, 140, 0.2);
+  }
+
+  /* THEME BUTTON SIZE FIX */
   .theme-btn {
     width: 30px;
     height: 30px;
   }
 
   /* =========================
-     HERO FIX
+     HERO FIX (IMPORTANT)
   ========================= */
   .hero {
     height: auto;
     min-height: 100vh;
-    padding: 100px 16px 60px;
+    padding: 110px 16px 60px;
   }
 
-  .headline {
-    font-size: 24px;
-    line-height: 1.3;
+  .hero-inner {
+    max-width: 100%;
   }
 
   .name {
-    font-size: 14px;
+    font-size: 13px;
+  }
+
+  .headline {
+    font-size: 26px;
+    line-height: 1.25;
   }
 
   .summary {
     font-size: 14px;
   }
 
+  /* BUTTON FIX */
   .hero-buttons {
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-top: 20px;
   }
 
   .btn {
     width: 100%;
+    padding: 12px;
+    font-size: 14px;
     text-align: center;
-    padding: 14px;
-    font-size: 14px;
   }
 
   /* =========================
-     SUMMARY CARD
+     PREVENT OVERLAP BUG
   ========================= */
-  .summary-card {
-    padding: 16px;
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 80px 16px;
+  }
+  .section-title {
+  font-size: 18px;
+}
+
+  /* Disable heavy transforms on mobile */
+  .hero {
+    transform: none !important;
+    opacity: 1 !important;
   }
 
-  .summary-text {
-    font-size: 14px;
+  .layer,
+  .parallax {
+    transform: none !important;
+  }
+  /* TIMELINE */
+  .timeline {
+    padding-left: 10px;
   }
 
-  /* =========================
-     TIMELINE → STACK
-  ========================= */
+  /* MOVE LINE LEFT */
   .timeline::before,
   .timeline-progress {
-    left: 18px;
+    left: 16px;
   }
 
+  /* STACK ITEMS CLEAN */
   .timeline-item {
     width: 100%;
     padding-left: 50px;
-    text-align: left;
+    margin-bottom: 40px;
   }
 
+  /* REMOVE LEFT/RIGHT SPLIT */
   .timeline-item.left,
   .timeline-item.right {
     left: 0;
+    text-align: left;
+    padding-inline: 18px 2px;
   }
 
+  /* DOT */
   .timeline-dot {
-    left: 18px;
+    left: 16px;
+    top: 30px;
   }
 
-  /* =========================
-     CASE STUDY FIX
-  ========================= */
+  /* CARD IMPROVEMENT */
+  .timeline-content {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .timeline-content h3 {
+    font-size: 16px;
+  }
+
+  .timeline-content p {
+    font-size: 13.5px;
+  }
+
+  /* CASE */
   .case-wrapper {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 40px;
+    align-items: stretch;
+    padding-inline: 20px;
   }
 
+  /* REMOVE STICKY */
   .case-visual {
     position: relative;
     top: 0;
@@ -1037,8 +1025,14 @@ section {
     height: 220px;
   }
 
+  /* TEXT FLOW */
   .case-story {
     gap: 50px;
+  }
+
+  .step {
+    opacity: 1; /* always visible on mobile */
+    transform: none;
   }
 
   .step h2 {
@@ -1049,100 +1043,36 @@ section {
     font-size: 16px;
   }
 
-  .step p,
-  .step li {
+  .step p {
     font-size: 14px;
   }
 
-  /* =========================
-     FORM FIX
-  ========================= */
-  input,
-  textarea {
-    width: 100%;
-    font-size: 16px;
-    padding: 12px;
+  /* ALWAYS SHOW CONTENT */
+  .visual-before,
+  .visual-after {
+    opacity: 1 !important;
+    transform: none !important;
+    position: relative;
   }
 
-  form {
-    gap: 12px;
+  /* show only ONE (cleaner UX) */
+  .visual-after {
+    display: none;
+  }
+
+  /* steps always visible */
+  .step {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* form */
+  form input,
+  form textarea {
+    font-size: 14px;
   }
 
   button {
-    width: 100%;
-    padding: 14px;
-  }
-
-  /* =========================
-     REMOVE HEAVY EFFECTS (IMPORTANT)
-  ========================= */
-  .cursor-glow,
-  .glow-2,
-  .layer-back {
-    display: none !important;
-  }
-}
-
-/* =========================================
-   📱 EXTRA SMALL DEVICES (iPhone SE)
-========================================= */
-@media (max-width: 420px) {
-  nav {
-    max-width: 360px;
-    padding: 8px 10px;
-  }
-
-  .nav-link {
-    font-size: 11px;
-    padding: 5px 6px;
-  }
-
-  .headline {
-    font-size: 22px;
-  }
-
-  .hero {
-    padding: 90px 14px 60px;
-  }
-
-  section {
-    padding: 70px 14px;
-    padding-bottom: 120px;
-  }
-
-  .case-visual,
-  .parallax {
-    height: 200px;
-  }
-
-  .timeline-item {
-    padding-left: 45px;
-  }
-}
-/* =========================
-   CASE STUDY MOBILE PADDING FIX
-========================= */
-@media (max-width: 768px) {
-  .case-section {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .case-wrapper {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .case-story {
-    padding: 0;
-  }
-
-  .step {
-    padding: 0 4px; /* small inner breathing space */
-  }
-
-  .parallax {
-    width: 100%;
+    font-size: 14px;
   }
 }
 
@@ -1158,7 +1088,16 @@ section {
 .skill-card {
   position: relative;
   overflow: hidden;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+.skill-card h3 {
+  font-size: 16px;
+}
+
+.skill-card p {
+  font-size: 13px;
 }
 
 /* glow layer */
@@ -1166,9 +1105,11 @@ section {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at var(--x,50%) var(--y,50%),
-    rgba(132,169,140,0.25),
-    transparent 60%);
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(132, 169, 140, 0.25),
+    transparent 60%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -1180,7 +1121,7 @@ section {
 /* hover lift */
 .skill-card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
 }
 
 /* TEXT */
@@ -1198,7 +1139,7 @@ section {
   margin-top: 14px;
   height: 6px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
 }
 
@@ -1207,6 +1148,6 @@ section {
   height: 100%;
   width: 0;
   border-radius: 10px;
-  background: linear-gradient(90deg,#84a98c,#52796f);
+  background: linear-gradient(90deg, #84a98c, #52796f);
   transition: width 1.2s ease;
 }
