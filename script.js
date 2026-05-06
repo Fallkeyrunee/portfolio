@@ -46,7 +46,6 @@ window.addEventListener("scroll", () => {
   });
 });
 
-
 // ===============================
 // NAV HIDE / SHOW (ADD HERE)
 // ===============================
@@ -69,15 +68,17 @@ window.addEventListener("scroll", () => {
   lastScrollNav = currentScroll;
 });
 
-
 // ===============================
-// CASE STUDY SWITCH
+// CASE STUDY (STABLE + PREMIUM)
 // ===============================
 const steps = document.querySelectorAll(".step");
 const before = document.querySelector(".visual-before");
 const after = document.querySelector(".visual-after");
+const bars = document.querySelectorAll(".bar");
 
-window.addEventListener("scroll", () => {
+let ticking = false;
+
+function updateCaseStudy() {
   const trigger = window.innerHeight * 0.6;
 
   steps.forEach((step, i) => {
@@ -93,7 +94,21 @@ window.addEventListener("scroll", () => {
       }
     }
   });
+}
+
+// ✅ PERFORMANCE (no jitter)
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      updateCaseStudy();
+      ticking = false;
+    });
+    ticking = true;
+  }
 });
+
+// ✅ INITIAL STATE
+window.addEventListener("load", updateCaseStudy);
 
 // ===============================
 // INIT STATE (IMPORTANT FIX)
@@ -253,7 +268,6 @@ document.querySelectorAll(".timeline-content").forEach((el) => {
   });
 });
 
-
 // ===============================
 // SUMMARY STAGGER REVEAL
 // ===============================
@@ -326,3 +340,106 @@ if (timeline) {
   window.addEventListener("scroll", animateTimeline);
   window.addEventListener("load", animateTimeline);
 }
+
+// ===============================
+// SKILL HOVER GLOW (CURSOR SYNC)
+// ===============================
+document.querySelectorAll(".skill-card").forEach((card) => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty("--x", e.clientX - rect.left + "px");
+    card.style.setProperty("--y", e.clientY - rect.top + "px");
+  });
+});
+
+// ===============================
+// SKILL PROGRESS ANIMATION
+// ===============================
+const skillCards = document.querySelectorAll(".skill-card");
+
+function animateSkills() {
+  const trigger = window.innerHeight * 0.85;
+
+  skillCards.forEach((card) => {
+    const top = card.getBoundingClientRect().top;
+
+    if (top < trigger) {
+      const value = card.dataset.skill;
+      const bar = card.querySelector(".skill-bar span");
+
+      if (bar && !bar.classList.contains("loaded")) {
+        bar.style.width = value + "%";
+        bar.classList.add("loaded");
+      }
+    }
+  });
+}
+
+window.addEventListener("scroll", animateSkills);
+window.addEventListener("load", animateSkills);
+
+// ===============================
+// MAGNETIC EFFECT (SUBTLE)
+// ===============================
+document.querySelectorAll(".skill-card").forEach((card) => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    card.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px) scale(1.02)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "";
+  });
+});
+
+// ===============================
+// PARALLAX DEPTH (APPLE FEEL)
+// ===============================
+const layers = document.querySelectorAll(".layer");
+
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
+
+  layers.forEach((layer, i) => {
+    const depth = (i + 1) * 20;
+    layer.style.transform = `translateY(${scrollY * depth * 0.0008}px)`;
+  });
+});
+
+// ===============================
+// SKILL CARD 3D TILT
+// ===============================
+document.querySelectorAll(".skill-card").forEach((card) => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    card.style.transform = `
+      rotateX(${y * -10}deg)
+      rotateY(${x * 10}deg)
+      scale(1.05)
+    `;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "";
+  });
+});
+
+// ===============================
+// HERO SCROLL EFFECT
+// ===============================
+const hero = document.querySelector(".hero");
+
+window.addEventListener("scroll", () => {
+  const scrolled = window.scrollY;
+
+  if (hero) {
+    hero.style.transform = `scale(${1 - scrolled * 0.0003})`;
+    hero.style.opacity = `${1 - scrolled * 0.0015}`;
+  }
+});
